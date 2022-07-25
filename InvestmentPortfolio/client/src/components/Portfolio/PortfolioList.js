@@ -3,7 +3,9 @@ import { ListGroup, ListGroupItem } from "reactstrap";
 import { getAllPortfolios } from "../../modules/portfolioManager";
 import Portfolio from "./Portfolio";
 import { Link } from "react-router-dom";
-//display 
+
+//display list of portfolio; when component loads, it will call the getAllPort fn, set the 
+//state of the portfolios array and rerender to display list 
 
 const PortfolioList = () => {
     const [portfolios, setPortfolios] = useState([]);
@@ -20,23 +22,23 @@ const PortfolioList = () => {
 
     return (
         <div className="container">
-            <Link to="/portfolio/add">Add a Portfolio</Link>
+            <Link to="/portfolio/add">Add a New Portfolio</Link>
             <div className="row justify-content-center">
                 <ListGroup>
-                    {portfolios.map((p) => {
-                        if (p.id !== "No Portfolio") {
+                    {portfolios.map((portfolio) => {
+                        if (portfolio.id !== "No Portfolio") {
                             return (
-                                <ListGroupItem key={p.id}>
+                                <ListGroupItem key={portfolio.id}>
                                     <Portfolio portfolio={portfolio} />
-                                    {p.id} <Link to={'/portfolio/edit/${p.id}'}>Edit</Link>{" "}
-                                    <Link to={'portfolio/delete/${p.id}'}>Delete</Link>
+                                    {portfolio.id} <Link to={'/portfolio/edit/${portfolio.id}'}>Edit</Link>{" "}
+                                    <Link to={'portfolio/delete/${portfolio.id}'}>Delete</Link>
                                     <Link to={'/portfolios/${portfolio.id}'}>Details</Link>
                                 </ListGroupItem>
                             );
                         } else {
                             return (
-                                <ListGroupItem key={p.id}>
-                                    {p.id} <p>Default Portfolio</p>
+                                <ListGroupItem key={portfolio.id}>
+                                    {portfolio.id} <p>Default Portfolio</p>
                                 </ListGroupItem>
                             );
                         }

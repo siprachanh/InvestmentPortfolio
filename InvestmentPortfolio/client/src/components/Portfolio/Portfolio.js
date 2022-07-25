@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
-import { getAllPortfolios } from "../../modules/portfolioManager";
+import { getAllPortfolios, deletePortfolio } from "../../modules/portfolioManager";
 
 const Portfolio = ({ portfolio }) => {
     const handleDelete = (e) => {
@@ -12,7 +12,7 @@ const Portfolio = ({ portfolio }) => {
 
     return (
         <Card>
-            <h3>Portfolio List</h3>
+            <h3>My Portfolio </h3>
 
             <CardBody>
                 <p> Portfolio Id: {portfolio.id}</p>

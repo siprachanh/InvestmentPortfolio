@@ -44,7 +44,7 @@ namespace InvestmentPortfolio.Repositories
                                 RiskLevel = new RiskLevel()
                                 {
                                     Id = DbUtils.GetInt(reader, "Id"),
-                                    Name = DbUtils.GetString(reader, "Name"),
+                                    Name = DbUtils.GetString(reader, "RiskLevelName"),
                                     Description = DbUtils.GetString(reader, "Description"),
                                 },
                                 CashOnHand = reader.GetDecimal("CashOnHand"),
