@@ -17,7 +17,7 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                     <Route index element={isLoggedIn ? <PortfolioList /> : <Navigate to="/login" />}
                     />
-                    <Route path="portfolios"
+                    <Route path="newportfolio"
                         element={isLoggedIn ? <PortfolioForm /> : <Navigate to="/login" />} />
                     <Route path=":id" element={<p>TODO: Make Portfolio Details component</p>} />
                     <Route path="login" element={<Login />} />

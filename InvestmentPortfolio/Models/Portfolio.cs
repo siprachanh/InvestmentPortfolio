@@ -12,9 +12,8 @@ namespace InvestmentPortfolio.Models
         public int UserId { get; set; }
         public string Description { get; set; }
 
-        public List<Portfolio> Portfolios { get; set; }
         public RiskLevel RiskLevel { get; internal set; }
         public UserProfile UserProfile { get; internal set; }
-        public string FirebaseUserId { get; internal set; }
+       
     }
 }

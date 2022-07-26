@@ -30,6 +30,7 @@ namespace InvestmentPortfolio
         // register repo with ASP.Net by calling services.AddTransient (injection method)
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRiskLevelRepository, RiskLevelRepository>();
             services.AddTransient<IPortfolioRepository, PortfolioRepository>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 

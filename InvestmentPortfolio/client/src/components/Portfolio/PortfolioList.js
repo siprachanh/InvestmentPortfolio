@@ -22,7 +22,7 @@ const PortfolioList = () => {
 
     return (
         <div className="container">
-            <Link to="/portfolio/add">Add a New Portfolio</Link>
+            <Link to="/newportfolio">Add a New Portfolio</Link>
             <div className="row justify-content-center">
                 <ListGroup>
                     {portfolios.map((portfolio) => {

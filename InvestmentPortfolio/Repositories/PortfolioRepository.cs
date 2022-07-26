@@ -58,7 +58,7 @@ namespace InvestmentPortfolio.Repositories
                                 },
                                 Description = DbUtils.GetString(reader, "Description"),
 
-                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                //FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             });
                         };
 
@@ -76,11 +76,10 @@ namespace InvestmentPortfolio.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO Portfolio (RiskLevelId, RiskLevel, CashOnHand, UserId, Description)
-                    OUTPUT INSERTED.ID
-                    VALUES(@RiskLevelId, @RiskLevel, @CashOnHand, @UserId, @Description)";
+                    INSERT INTO Portfolio (RiskLevelId,CashOnHand, UserId, Description)
+                    OUTPUT INSERTED.Id
+                    VALUES(@RiskLevelId,  @CashOnHand, @UserId, @Description)";
                     DbUtils.AddParameter(cmd, "@RiskLevelId", portfolio.RiskLevelId);
-                    DbUtils.AddParameter(cmd, "@RiskLevel", portfolio.RiskLevel);
                     DbUtils.AddParameter(cmd, "@CashOnHand", portfolio.CashOnHand);
                     DbUtils.AddParameter(cmd, "@UserId", portfolio.UserId);
                     DbUtils.AddParameter(cmd, "@Description", portfolio.Description);
@@ -100,14 +99,12 @@ namespace InvestmentPortfolio.Repositories
                     cmd.CommandText = @"
                     UPDATE Portfolio
                     SET RiskLevelId = @RiskLevelId, 
-                        RiskLevel = @RiskLevel,
                         CashOnHand = @CashOnHand,
                         UserId = @UserId, 
                         Description = @Description
                     WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@RiskLevelId", portfolio.RiskLevelId);
-                    DbUtils.AddParameter(cmd, "@RiskLevel", portfolio.RiskLevel);
                     DbUtils.AddParameter(cmd, "@CashOnHand", portfolio.CashOnHand);
                     DbUtils.AddParameter(cmd, "@UserId", portfolio.UserId);
                     DbUtils.AddParameter(cmd, "@Description", portfolio.Description);

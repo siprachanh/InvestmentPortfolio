@@ -3,6 +3,7 @@ using System;
 using InvestmentPortfolio.Repositories;
 using InvestmentPortfolio.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace InvestmentPortfolio.Controllers
 {
@@ -13,10 +14,14 @@ namespace InvestmentPortfolio.Controllers
     //Web api controller class inherits from the controllerbase class instead of controller
     public class PortfolioController : ControllerBase
     {
+        private readonly IUserProfileRepository _profileRepository;
         private readonly IPortfolioRepository _portfolioRepository;
-        public PortfolioController(IPortfolioRepository portfolioRepository)
+       
+
+        public PortfolioController(IPortfolioRepository portfolioRepository, IUserProfileRepository userProfileRepository)
         {
             _portfolioRepository = portfolioRepository;
+            _profileRepository = userProfileRepository;
         }
         // GET: api/<PortfolioController> 
         [HttpGet]
@@ -25,6 +30,7 @@ namespace InvestmentPortfolio.Controllers
             return Ok(_portfolioRepository.GetAll());
         }
 
+        
         // GET api/<PortfolioController>/5
         //[HttpGet("{id}")]
         //public IActionResult Get(int id)
@@ -39,12 +45,17 @@ namespace InvestmentPortfolio.Controllers
 
         //here, user has ability to save a new Portfolio to the db
         //POST api/<PortfolioController>, creates an entity
+        //getCurrentId 
         [HttpPost]
         public IActionResult Post(Portfolio portfolio)
         {
+            var userProfile = GetCurrentUserProfile();
+            portfolio.UserId = userProfile.Id;
             _portfolioRepository.Add(portfolio);
-            return CreatedAtAction("Get", new { id = portfolio.Id }, portfolio);
+            return NoContent();
+            //return CreatedAtAction("Get", new { id = portfolio.Id }, portfolio);
         }
+      
 
         // PUT api/<PortfolioController>/5, updates an entity
         //{id} says this method expects the URL to contain a route param with the portfolio's id
@@ -60,6 +71,7 @@ namespace InvestmentPortfolio.Controllers
             return Ok(portfolio);
         }
         //try also for ln 59: return NoContent();
+       
 
 
         //// DELETE api/<PortfolioController>/5
@@ -69,5 +81,11 @@ namespace InvestmentPortfolio.Controllers
             _portfolioRepository.Delete(id);
             return NoContent();
         }
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _profileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
     }
+    
 }
