@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormGroup, Input, Label, Button, Form } from "reactstrap";
 import { addPortfolio, updatePortfolio } from "../../modules/portfolioManager";
+import { getAllRiskLevels } from "../../modules/riskLevelManager";
 
 const PortfolioForm = ({ getPortfolio }) => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const PortfolioForm = ({ getPortfolio }) => {
 
     };
     const [portfolio, setPortfolio] = useState(emptyPortfolio);
+    //sets state of portfolio to object to input fields
     const handleInputChange = (e) => {
         const value = e.target.value;
         const key = e.target.id;
@@ -21,6 +23,20 @@ const PortfolioForm = ({ getPortfolio }) => {
         portfolioCopy[key] = value;
         setPortfolio(portfolioCopy);
     };
+    //get all of the risklevels for dropdown selection 
+    const [riskLevels, setRiskLevels] = useState({
+        riskLevelId: 0,
+        riskLevelName: "",
+        riskLevelDescription: "",
+
+    })
+
+    useEffect(() => {
+        getAllRiskLevels().then((riskLevels) => {
+            setRiskLevels(riskLevels)
+        })
+    }, [])
+
     const handleSave = (e) => {
         e.preventDefault();
         addPortfolio(portfolio).then(() => {
@@ -31,6 +47,12 @@ const PortfolioForm = ({ getPortfolio }) => {
     };
 
 
+
+    // if (riskLevelId !==){
+    //     window.alert("Please select a risk level")
+    // } else [
+    //     addPortfolio(portfolio).then(())
+    // ]
     return (
         <Form>
             <FormGroup>
@@ -40,9 +62,9 @@ const PortfolioForm = ({ getPortfolio }) => {
                     onChange={handleInputChange}
                     className="form-control">
                     <option value="0"> Select a risk level</option>
-                    {portfolio.map(singlePortfolio => (
-                        <option key={singlePortfolio.riskLevelId} value={singlePortfolio.riskLevelId}>
-                            {singlePortfolio.riskLevelId}
+                    {riskLevels.map(risklevel => (
+                        <option key={risklevel.id} value={risklevel.id}>
+                            {risklevel.name}
                         </option>
                     ))}
 

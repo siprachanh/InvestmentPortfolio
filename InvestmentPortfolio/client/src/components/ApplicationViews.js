@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import PortfolioList from "./Portfolio/PortfolioList";
 import PortfolioForm from "./Portfolio/PortfolioForm";
 // import PortfolioPurchase from "./PortfolioPurchase";
+import RiskLevelList from "./RiskLevel/RiskLevelList";
 import Login from "./Login";
 import Register from "./Register";
 
@@ -19,6 +20,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                     />
                     <Route path="newportfolio"
                         element={isLoggedIn ? <PortfolioForm /> : <Navigate to="/login" />} />
+                    <Route path="risklevel">
+                        <Route index element={<RiskLevelList />} />
+                    </Route>
                     <Route path=":id" element={<p>TODO: Make Portfolio Details component</p>} />
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
