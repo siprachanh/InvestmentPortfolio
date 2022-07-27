@@ -24,13 +24,9 @@ const PortfolioForm = ({ getPortfolio }) => {
         setPortfolio(portfolioCopy);
     };
     //get all of the risklevels for dropdown selection 
-    const [riskLevels, setRiskLevels] = useState({
-        riskLevelId: 0,
-        riskLevelName: "",
-        riskLevelDescription: "",
+    const [riskLevels, setRiskLevels] = useState([]);
 
-    })
-
+    //loads risklevel data for portfolio and updates state
     useEffect(() => {
         getAllRiskLevels().then((riskLevels) => {
             setRiskLevels(riskLevels)
@@ -38,31 +34,25 @@ const PortfolioForm = ({ getPortfolio }) => {
     }, [])
 
     const handleSave = (e) => {
-        e.preventDefault();
+        //prevent the browser from submitting the form
+        // e.preventDefault();
+
         addPortfolio(portfolio).then(() => {
             // navigate('/portfolio/${portfolioId}');
-            //Navigate user back to the home/dashboard route
-            navigate("/newportfolio");
+            //Navigate user back to the portfolio/dashboard route
+            navigate("/portfolio");
         });
     };
 
-
-
-    // if (riskLevelId !==){
-    //     window.alert("Please select a risk level")
-    // } else [
-    //     addPortfolio(portfolio).then(())
-    // ]
     return (
         <Form>
             <FormGroup>
                 <Label for="risk level id"> Portfolio Risk Level</Label>
-                <Input type="select" value={portfolio.riskLevelId} name="risk level id" id="riskLevelId" placeholder="portfolio risklevel name"
-
+                <Input type="select" value={portfolio.riskLevelId} name="riskLevelId" id="riskLevelId" placeholder="portfolio risklevel name"
                     onChange={handleInputChange}
-                    className="form-control">
+                    className="form-select">
                     <option value="0"> Select a risk level</option>
-                    {riskLevels.map(risklevel => (
+                    {riskLevels.map((risklevel) => (
                         <option key={risklevel.id} value={risklevel.id}>
                             {risklevel.name}
                         </option>
@@ -72,7 +62,7 @@ const PortfolioForm = ({ getPortfolio }) => {
             </FormGroup>
             <FormGroup>
                 <Label for="Risk Level"> Portfolio Cash On Hand ($): </Label>
-                <Input type="number" name="cash on hand" id="cashOnHand" placeholder="portfolio cash on hand"
+                <Input type="number" name="cashOnHand" id="cashOnHand" placeholder="portfolio cash on hand"
                     value={portfolio.cashOnHand}
                     onChange={handleInputChange} />
             </FormGroup>

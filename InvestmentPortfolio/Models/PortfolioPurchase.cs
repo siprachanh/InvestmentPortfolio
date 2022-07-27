@@ -11,5 +11,9 @@ namespace InvestmentPortfolio.Models
         public int PortfolioId { get; set; }
         public int AmountPurchase { get; set; }
         public DateTime PurchaseDate { get; set; }
+
+        public Security Security { get; set; }
+
+        public Portfolio Portfolio { get; set; }
     }
 }

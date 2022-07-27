@@ -13,7 +13,24 @@ export const getAllPortfolios = () => {
             if (res.ok) {
                 return res.json();
             } else {
-                throw new Error("An error occurred retrieving portfolios");
+                throw new Error("An error occurred retrieving portfolio");
+            }
+        });
+    });
+};
+
+export const getPortfolioById = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${_apiUrl}/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((resp) => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                throw new Error("An error occurred retrieving portfolio");
             }
         });
     });
@@ -29,11 +46,9 @@ export const addPortfolio = (portfolio) => {
             },
             body: JSON.stringify(portfolio)
         }).then(res => {
-            if (res.ok) {
-                return res.json();
-            } else if (res.status === 401) {
+            if (res.status === 401) {
                 throw new Error("Unauthorized");
-            } else {
+            } else if (!res.ok) {
                 throw new Error("An unknown error occurred while trying to save a new portfolio.");
             }
         });

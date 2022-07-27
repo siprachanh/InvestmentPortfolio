@@ -30,7 +30,7 @@ const PortfolioList = () => {
                             return (
                                 <ListGroupItem key={portfolio.id}>
                                     <Portfolio portfolio={portfolio} />
-                                    {portfolio.id} <Link to={'/portfolio/edit/${portfolio.id}'}>Edit</Link>{" "}
+                                    {portfolio.id} <Link to={'/portfolio/Edit/${portfolio.id}'}>Edit</Link>{" "}
                                     <Link to={'portfolio/delete/${portfolio.id}'}>Delete</Link>
                                     <Link to={'/portfolios/${portfolio.id}'}>Details</Link>
                                 </ListGroupItem>

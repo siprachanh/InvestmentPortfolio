@@ -33,6 +33,7 @@ namespace InvestmentPortfolio
             services.AddTransient<IRiskLevelRepository, RiskLevelRepository>();
             services.AddTransient<IPortfolioRepository, PortfolioRepository>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IPortfolioPurchaseRepository, PortfolioPurchaseRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

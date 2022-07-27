@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import PortfolioList from "./Portfolio/PortfolioList";
 import PortfolioForm from "./Portfolio/PortfolioForm";
+import EditPortfolio from "./Portfolio/PortfolioEdit";
 // import PortfolioPurchase from "./PortfolioPurchase";
 import RiskLevelList from "./RiskLevel/RiskLevelList";
 import Login from "./Login";
@@ -16,19 +17,20 @@ export default function ApplicationViews({ isLoggedIn }) {
             <Routes>
                 <Route path="/">
 
-                    <Route index element={isLoggedIn ? <PortfolioList /> : <Navigate to="/login" />}
-                    />
+                    <Route index element={isLoggedIn ? <PortfolioList /> : <Navigate to="/login" />} />
                     <Route path="newportfolio"
                         element={isLoggedIn ? <PortfolioForm /> : <Navigate to="/login" />} />
-                    <Route path="risklevel">
-                        <Route index element={<RiskLevelList />} />
-                    </Route>
-                    <Route path=":id" element={<p>TODO: Make Portfolio Details component</p>} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
-                    <Route path="*" element={<p>Whoops, nothing here...</p>} />
+                    <Route path="portfolio/Edit"
+                        element={isLoggedIn ? <EditPortfolio /> : <Navigate to="/login" />} />
                 </Route>
+                <Route path="risklevel">
+                    <Route index element={<RiskLevelList />} />
+                </Route>
+                <Route path=":id" element={<p>TODO: Make Portfolio Details component</p>} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="*" element={<p>Whoops, nothing here...</p>} />
             </Routes>
-        </main>
+        </main >
     );
 };

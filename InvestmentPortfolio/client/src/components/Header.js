@@ -39,7 +39,7 @@ export default function Header({ isLoggedIn }) {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/risklevel">
-                                        Risk Level
+                                        Risk Level Information
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
