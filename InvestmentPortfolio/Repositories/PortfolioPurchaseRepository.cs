@@ -19,7 +19,7 @@ namespace InvestmentPortfolio.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    // PortfolioPurchase: Id, SecurityId, PortfolioId, AmountPurchase, PurchaseDate
+                    
                     cmd.CommandText = @"SELECT pp.SecurityId AS PortfolioPurchaseSecurityId, pp.Id AS PortfolioPurchaseId, s.Price, p.RiskLevelId AS PortfolioRiskLevelId, p.CashOnHand, p.Description, s.Id AS SecurityId,
                                         rl.Id AS RiskLevelId, rl.Name AS RiskLevelName, rl.Description AS RiskLevelDescription, s.Name AS SecurityName, s.TypeId, s.Price, p.Id, p.UserId, up.Id AS UserProfileId, up.FirebaseUserId, up.Email, pp.AmountPurchase, pp.PurchaseDate AS Date
                                         FROM PortfolioPurchase pp                             
