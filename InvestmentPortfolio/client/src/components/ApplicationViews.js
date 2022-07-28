@@ -6,6 +6,7 @@ import EditPortfolio from "./Portfolio/PortfolioEdit";
 // import PortfolioPurchase from "./PortfolioPurchase";
 import PortfolioPurchaseList from "./PortfolioPurchase/PortfolioPurchaseList";
 import RiskLevelList from "./RiskLevel/RiskLevelList";
+import SecurityList from "./Security/SecurityList";
 import Login from "./Login";
 import Register from "./Register";
 
@@ -29,6 +30,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                 </Route>
                 <Route path="risklevel">
                     <Route index element={<RiskLevelList />} />
+                </Route>
+                <Route path="security">
+                    <Route index element={<SecurityList />} />
                 </Route>
                 <Route path=":id" element={<p>TODO: Make Portfolio Details component</p>} />
                 <Route path="login" element={<Login />} />
