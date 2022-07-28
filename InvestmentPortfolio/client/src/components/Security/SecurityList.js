@@ -23,7 +23,7 @@ const SecurityList = () => {
                     {security.map((security) => {
                         return (
                             <ListGroupItem key={security.id}>
-                                Security Id {security.id} is a {security.name} of Type {security.typeId} worth ${security.price} per unit<Link to={`/security/edit/${security.id}`}>Edit</Link>{" "}
+                                Security {security.id} is a {security.name} of Type {security.typeId} worth ${security.price} per unit<Link to={`/security/edit/${security.id}`}>Edit</Link>{" "}
                                 <Link to={`/security/delete/${security.id}`}>Delete</Link>
                             </ListGroupItem>
                         );

@@ -31,8 +31,8 @@ const PortfolioPurchaseList = () => {
                                 <ListGroupItem key={portfolioPurchase.id}>
                                     <PortfolioPurchase portfolioPurchase={portfolioPurchase} />
                                     {portfolioPurchase.id} <Link to={'/portfoliopurchase/Edit/${portfolioPurchase.id}'}>Edit</Link>{" "}
-                                    <Link to={'portfoliopurchase/delete/${portfolioPurchase.id}'}>Delete</Link>
-                                    <Link to={'/portfoliopurhcases/${portfolioPurchase.id}'}>Details</Link>
+                                    {/* <Link to={'portfoliopurchase/delete/${portfolioPurchase.id}'}>Delete</Link>
+                                    <Link to={'/portfoliopurhcases/${portfolioPurchase.id}'}>Details</Link> */}
                                 </ListGroupItem>
                             );
                         } else {

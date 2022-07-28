@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import PortfolioList from "./Portfolio/PortfolioList";
 import PortfolioForm from "./Portfolio/PortfolioForm";
 import EditPortfolio from "./Portfolio/PortfolioEdit";
-// import PortfolioPurchase from "./PortfolioPurchase";
+import { deletePortfolio } from "../modules/portfolioManager";
 import PortfolioPurchaseList from "./PortfolioPurchase/PortfolioPurchaseList";
 import RiskLevelList from "./RiskLevel/RiskLevelList";
 import SecurityList from "./Security/SecurityList";
@@ -22,9 +22,12 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <Route index element={isLoggedIn ? <PortfolioList /> : <Navigate to="/login" />} />
                     <Route path="newportfolio"
                         element={isLoggedIn ? <PortfolioForm /> : <Navigate to="/login" />} />
-                    <Route path="portfolio/Edit"
+                    <Route path="portfolio/Edit/:id"
                         element={isLoggedIn ? <EditPortfolio /> : <Navigate to="/login" />} />
                 </Route>
+                <Route path="portfolio/Delete"
+                    element={isLoggedIn ? <deletePortfolio /> : <Navigate to="/portfolio" />} />
+
                 <Route path="portfoliopurchase">
                     <Route index element={isLoggedIn ? <PortfolioPurchaseList /> : <Navigate to="/login" />} />
                 </Route>

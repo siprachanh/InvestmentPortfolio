@@ -21,6 +21,7 @@ const Portfolio = ({ portfolio }) => {
                 <p> Portfolio User: {portfolio.userProfile.email}</p>
                 <p> Portfolio Description: {portfolio.description}</p>
                 <Button className="btn btn-primary" onClick={handleDelete}>Delete</Button>
+
             </CardBody>
         </Card>
     );

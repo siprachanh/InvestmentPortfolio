@@ -62,15 +62,15 @@ namespace InvestmentPortfolio.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Portfolio portfolio)
         {
-            if (id != portfolio.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != portfolio.Id)
+            //{
+            //    return BadRequest();
+            //}
 
             _portfolioRepository.Update(portfolio);
             return Ok(portfolio);
         }
-        //try also for ln 59: return NoContent();
+       
        
 
 

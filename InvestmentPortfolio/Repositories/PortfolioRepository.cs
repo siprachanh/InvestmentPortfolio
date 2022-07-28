@@ -123,7 +123,8 @@ namespace InvestmentPortfolio.Repositories
                 conn.Open();
                 using(var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Portfolio WHERE Id = @Id";
+                    cmd.CommandText = @"DELETE FROM PortfolioPurchase WHERE PortfolioId = @Id; 
+                                        DELETE FROM Portfolio WHERE Id = @Id";
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();
                 }

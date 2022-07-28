@@ -2,21 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { updatePortfolio, getPortfolioById } from "../../modules/portfolioManager";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { getAllRiskLevels } from "../../modules/riskLevelManager";
 
 const EditPortfolio = () => {
     const navigate = useNavigate();
     const { id } = useParams();
-    const [portfolio, setPortfolio] = useState({
-        Id: 0,
-        RiskLevelId: 1,
-        CashOnHand: 0,
-        UserId: 1,
-        Description: "",
-    });
+    const [portfolio, portfolioUpdate] = useState({});
+
+    const [riskLevels, setRiskLevels] = useState([]);
 
     useEffect(() => {
-        getPortfolioById(id).then(setPortfolio);
-    }, [id]);
+        getPortfolioById(id).then(portfolioUpdate);
+    }, []);
+
+    useEffect(() => {
+        getAllRiskLevels().then((riskLevels) => {
+            setRiskLevels(riskLevels)
+        })
+    }, [])
 
     const handleInputChange = (e) => {
         const value = e.target.value;
@@ -25,24 +28,23 @@ const EditPortfolio = () => {
         const portfolioCopy = { ...portfolio };
 
         portfolioCopy[key] = value;
-        setPortfolio(portfolioCopy);
+        portfolioUpdate(portfolioCopy);
     };
-    const handleSave = (e) => {
-        e.preventDefault();
+    const handleEdit = (e) => {
         updatePortfolio(portfolio).then(() => {
-            navigate("/portfolios");
+            navigate("/portfolio");
         });
     };
     return (
         <Form>
             <FormGroup>
                 <Label for="risklevelId">RiskLevelId</Label>
-                <Input type="select" value={portfolio.riskLevelId} name="risk level id" id="riskLevelId" placeholder="portfolio risklevel name"
+                <Input type="select" value={portfolio.riskLevelId} name="riskLevelId" id="riskLevelId" placeholder="portfolio risklevel name"
 
                     onChange={handleInputChange}
-                    className="form-control">
+                    className="form-select">
                     <option value="0"> Select a risk level</option>
-                    {portfolio.map((risklevel) => (
+                    {riskLevels.map((risklevel) => (
                         <option key={risklevel.id} value={risklevel.id}>
                             {risklevel.name}
                         </option>
@@ -63,7 +65,7 @@ const EditPortfolio = () => {
                     onChange={handleInputChange} />
             </FormGroup>
 
-            <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
+            <Button className="btn btn-primary" onClick={handleEdit}>Submit</Button>
 
         </Form >
     );
