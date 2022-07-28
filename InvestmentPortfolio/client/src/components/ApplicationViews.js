@@ -4,6 +4,7 @@ import PortfolioList from "./Portfolio/PortfolioList";
 import PortfolioForm from "./Portfolio/PortfolioForm";
 import EditPortfolio from "./Portfolio/PortfolioEdit";
 // import PortfolioPurchase from "./PortfolioPurchase";
+import PortfolioPurchaseList from "./PortfolioPurchase/PortfolioPurchaseList";
 import RiskLevelList from "./RiskLevel/RiskLevelList";
 import Login from "./Login";
 import Register from "./Register";
@@ -22,6 +23,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                         element={isLoggedIn ? <PortfolioForm /> : <Navigate to="/login" />} />
                     <Route path="portfolio/Edit"
                         element={isLoggedIn ? <EditPortfolio /> : <Navigate to="/login" />} />
+                </Route>
+                <Route path="portfoliopurchase">
+                    <Route index element={isLoggedIn ? <PortfolioPurchaseList /> : <Navigate to="/login" />} />
                 </Route>
                 <Route path="risklevel">
                     <Route index element={<RiskLevelList />} />

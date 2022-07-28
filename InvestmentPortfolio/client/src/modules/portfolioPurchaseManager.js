@@ -18,3 +18,14 @@ export const getAllPortfolioPurchases = () => {
         });
     });
 };
+
+export const deletePortfolioPurchase = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${_apiUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    });
+};

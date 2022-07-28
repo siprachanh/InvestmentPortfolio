@@ -5,7 +5,7 @@ import { getAllPortfolioPurchases, deletePortfolioPurchase } from "../../modules
 const PortfolioPurchase = ({ portfolioPurchase }) => {
     const handleDelete = (e) => {
         e.preventDefault();
-        deletePortfolioPurchase(PortfolioPurchase.id).then(() => {
+        deletePortfolioPurchase(portfolioPurchase.id).then(() => {
             getAllPortfolioPurchases()
         });
     };
