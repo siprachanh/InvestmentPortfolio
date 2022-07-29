@@ -31,8 +31,15 @@ const EditPortfolio = () => {
         portfolioUpdate(portfolioCopy);
     };
     const handleEdit = (e) => {
-        updatePortfolio(portfolio).then(() => {
-            navigate("/portfolio");
+        const editedPortfolio = {
+            id: id,
+            riskLevelId: portfolio.riskLevelId,
+            cashOnHand: portfolio.cashOnHand,
+            userId: portfolio.userId,
+            description: portfolio.description,
+        }
+        updatePortfolio(editedPortfolio).then(() => {
+            navigate("/");
         });
     };
     return (

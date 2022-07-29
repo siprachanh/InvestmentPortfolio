@@ -18,29 +18,29 @@ export default function ApplicationViews({ isLoggedIn }) {
         <main>
             <Routes>
                 <Route path="/">
-
                     <Route index element={isLoggedIn ? <PortfolioList /> : <Navigate to="/login" />} />
                     <Route path="newportfolio"
                         element={isLoggedIn ? <PortfolioForm /> : <Navigate to="/login" />} />
+
                     <Route path="portfolio/Edit/:id"
                         element={isLoggedIn ? <EditPortfolio /> : <Navigate to="/login" />} />
-                </Route>
-                <Route path="portfolio/Delete"
-                    element={isLoggedIn ? <deletePortfolio /> : <Navigate to="/portfolio" />} />
 
-                <Route path="portfoliopurchase">
-                    <Route index element={isLoggedIn ? <PortfolioPurchaseList /> : <Navigate to="/login" />} />
+                    <Route path="portfolio/Delete"
+                        element={isLoggedIn ? <deletePortfolio /> : <Navigate to="/portfolio" />} />
+
+                    <Route path="portfoliopurchase"
+                        element={isLoggedIn ? <PortfolioPurchaseList /> : <Navigate to="/login" />} />
+
+                    <Route path="risklevel" exact>
+                        <Route index element={<RiskLevelList />} />
+                    </Route>
+                    <Route path="security" exact>
+                        <Route index element={<SecurityList />} />
+                    </Route>
+                    <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                    <Route path="*" element={<p>Whoops, nothing here...</p>} />
                 </Route>
-                <Route path="risklevel">
-                    <Route index element={<RiskLevelList />} />
-                </Route>
-                <Route path="security">
-                    <Route index element={<SecurityList />} />
-                </Route>
-                <Route path=":id" element={<p>TODO: Make Portfolio Details component</p>} />
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-                <Route path="*" element={<p>Whoops, nothing here...</p>} />
             </Routes>
         </main >
     );

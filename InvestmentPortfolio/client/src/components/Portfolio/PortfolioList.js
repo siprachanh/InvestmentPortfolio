@@ -30,9 +30,7 @@ const PortfolioList = () => {
                             return (
                                 <ListGroupItem key={portfolio.id}>
                                     <Portfolio portfolio={portfolio} />
-                                    {portfolio.id} <Link to={`/portfolio/Edit/${portfolio.id}`}>Edit</Link>{" "}
-                                    {/* <Link to={'portfolio/delete/${portfolio.id}'}>Delete</Link>
-                                    <Link to={'/portfolios/${portfolio.id}'}>Details</Link> */}
+                                    {portfolio.id} <Link to={`/portfolio/Edit/${portfolio.id}`}>Edit</Link>{""}
                                 </ListGroupItem>
                             );
                         } else {
@@ -52,3 +50,9 @@ const PortfolioList = () => {
 
 
 export default PortfolioList;
+//the save fn is invokded
+//a new obj is created and using values from the component's state
+//the update fn is invoked
+//a PUT request is made to the server
+//an UPDATE statement is run in sql server
+// the web browser is redirected back to the Dashboard

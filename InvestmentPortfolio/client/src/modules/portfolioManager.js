@@ -26,11 +26,11 @@ export const getPortfolioById = (id) => {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        }).then((resp) => {
-            if (resp.ok) {
-                return resp.json();
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
             } else {
-                throw new Error("An error occurred retrieving portfolio");
+                throw new Error("An error occurred retrieving portfolio by Id");
             }
         });
     });
@@ -64,13 +64,11 @@ export const updatePortfolio = (portfolio) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(portfolio),
-        }).then((res) => {
+        }).then(res => {
             if (res.status === 401) {
                 throw new Error("Unauthorized");
             } else if (!res.ok) {
-                throw new Error(
-                    "An unknown error occurred while trying to save changes to portfolio."
-                );
+                throw new Error("An unknown error occurred while trying to save changes to portfolio.");
             }
         });
     });

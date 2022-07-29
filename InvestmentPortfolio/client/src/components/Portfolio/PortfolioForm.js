@@ -40,7 +40,7 @@ const PortfolioForm = ({ getPortfolio }) => {
         addPortfolio(portfolio).then(() => {
             // navigate('/portfolio/${portfolioId}');
             //Navigate user back to the portfolio/dashboard route
-            navigate("/portfolio/Edit");
+            navigate("/");
         });
     };
 

@@ -30,18 +30,6 @@ namespace InvestmentPortfolio.Controllers
             return Ok(_portfolioRepository.GetAll());
         }
 
-        
-        // GET api/<PortfolioController>/5
-        //[HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    var portfolio = _portfolioRepository.GetById(id);
-        //    if (portfolio == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(portfolio);
-        //}
 
         //here, user has ability to save a new Portfolio to the db
         //POST api/<PortfolioController>, creates an entity
@@ -53,7 +41,6 @@ namespace InvestmentPortfolio.Controllers
             portfolio.UserId = userProfile.Id;
             _portfolioRepository.Add(portfolio);
             return NoContent();
-            //return CreatedAtAction("Get", new { id = portfolio.Id }, portfolio);
         }
       
 
@@ -62,11 +49,12 @@ namespace InvestmentPortfolio.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Portfolio portfolio)
         {
-            //if (id != portfolio.Id)
-            //{
-            //    return BadRequest();
-            //}
-
+            if (id != portfolio.Id)
+            {
+                return BadRequest();
+            }
+            var userProfile = GetCurrentUserProfile();
+            portfolio.UserId = userProfile.Id;
             _portfolioRepository.Update(portfolio);
             return Ok(portfolio);
         }
